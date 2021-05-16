@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using  UnityEngine.UI;
-using Random = System.Random;
+using UnityEngine.UI;
 
 public class Clicker : MonoBehaviour
 {
+	// TODO: Move to GameController
+
 	[SerializeField]
 	private Text _maxScoreText;
 	[SerializeField]
@@ -18,6 +18,8 @@ public class Clicker : MonoBehaviour
 	private SpriteRenderer _gameZone;
 	private int _maxScore = 20;
 
+	// TODO: Item bonuses
+	// bool _isDouble, _isBigItem, _isFreeze;
 
 
 	private void Awake()
@@ -28,33 +30,29 @@ public class Clicker : MonoBehaviour
 		_maxScoreText.text = "Max score " + _maxScore.ToString();
 		_currentScoreText.text = _scores.ToString() + "/" + _maxScore.ToString();
 		ChangeItemPosition();
-
 	}
 
-	public void OnClick ()
+	public void OnClick()
 	{
 		ChangeItemPosition();
-		_scores ++;
-		_progressBar.GetComponent<Image>().fillAmount += 1f/_maxScore;
+		_scores++;
+		_progressBar.GetComponent<Image>().fillAmount += 1f / _maxScore;
 		_currentScoreText.text = _scores.ToString() + "/" + _maxScore.ToString();
 	}
 
 	private void ChangeItemPosition()
 	{
 		float posX, posY;
-		Random random = new Random();
 
-		posX = random.Next((int)_gameZone.bounds.min.x,(int)_gameZone.bounds.max.x);
-		posY = random.Next((int) _gameZone.bounds.min.y, (int) _gameZone.bounds.max.y);
+		posX = Random.Range(_gameZone.bounds.min.x, _gameZone.bounds.max.x);
+		posY = Random.Range(_gameZone.bounds.min.y, _gameZone.bounds.max.y);
 
 		Vector2 newItemPosition = new Vector2(posX, posY);
 		_itemTransform.transform.position = newItemPosition;
-
 	}
 
 	private void DoubleScoreBonus()
 	{
-
-
+		throw new System.NotImplementedException();
 	}
 }

@@ -1,49 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField]
-    private Text _timerText;
+	public event Action OnTimeOut;
 
-    public int maxTime = 30;
-    private float _currentTime;
-    private static bool _gameOver;
-    public static bool GameOver
-    {
-        get { return _gameOver; }
-    }
+	[SerializeField]
+	private Text _timerText;
+
+	private float _currentTime;
+	private bool _isTimeOut = false;
+	private bool _isPaused;
+
+	public bool IsTimeOut
+	{
+		get { return _isTimeOut; }
+	}
 
 
-    private void Start()
-    {
-        _currentTime = maxTime;
-        _timerText.text = maxTime.ToString();
-    }
+	public void Start(float time)
+	{
+		_currentTime = time;
+		_isTimeOut = false;
+		UpdateUI(_currentTime);
+	}
 
-    private void Update()
-    {
-        if (_currentTime > 0)
-        {
-            _currentTime -= 1 * Time.deltaTime;
-            _timerText.text = _currentTime.ToString("0") + " sec";
-        }
-        else
-        {
-            _gameOver = true;
-        }
-    }
+	public void Pause()
+	{
+		_isPaused = false;
+	}
 
-    IEnumerator TimerCoroutine()
-    {
-        if (_currentTime > 0)
-        {
-            _currentTime -= 1 * Time.deltaTime;
-            _timerText.text = _currentTime.ToString("0") + " sec";
-        }
-        yield return new WaitForSeconds(1f);
-    }
+	public void Resume()
+	{
+		throw new System.NotImplementedException();
+	}
 
+	public void Stop()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	private void Update()
+	{
+		if (_isTimeOut || _isPaused)
+			return;
+
+		_currentTime = Mathf.Max(0, _currentTime - Time.deltaTime);
+
+		if (_currentTime > 0)
+		{
+			UpdateUI(_currentTime);
+		}
+		else
+		{
+			_isTimeOut = true;
+			OnTimeOut?.Invoke();
+		}
+	}
+
+	private void UpdateUI(float time)
+	{
+		_timerText.text = time.ToString("0") + " sec";
+	}
 }
