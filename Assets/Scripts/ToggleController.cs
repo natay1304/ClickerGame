@@ -13,6 +13,8 @@ public class ToggleController : MonoBehaviour
 	private Toggle _toggle;
 	[SerializeField]
 	private Animator _animator;
+	[SerializeField]
+	private AudioSource _audioSourse;
 
 	private readonly int _isOnHash = Animator.StringToHash("IsOn");
 
@@ -20,9 +22,19 @@ public class ToggleController : MonoBehaviour
 	{
 		SetState(_toggle.isOn);
 		_toggle.onValueChanged.AddListener(SetState);
+		_toggle.onValueChanged.AddListener(SetMusic);
 	}
 
-	private void SetState(bool value)
+    private void SetMusic(bool value)
+    {
+		if (value)
+			_audioSourse.mute = false;
+		else
+			_audioSourse.mute = true;
+
+    }
+
+    private void SetState(bool value)
 	{
 		_animator.SetBool(_isOnHash, value);
 	}

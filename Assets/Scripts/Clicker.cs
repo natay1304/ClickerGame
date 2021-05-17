@@ -13,6 +13,8 @@ public class Clicker : MonoBehaviour
 	private GameObject _gamePanel;
 	[SerializeField]
 	private GameObject _progressBar;
+	[SerializeField]
+	private AudioSource _audioSourse;
 	private int _scores = 0;
 	private RectTransform _itemTransform;
 	private SpriteRenderer _gameZone;
@@ -38,6 +40,7 @@ public class Clicker : MonoBehaviour
 		_scores++;
 		_progressBar.GetComponent<Image>().fillAmount += 1f / _maxScore;
 		_currentScoreText.text = _scores.ToString() + "/" + _maxScore.ToString();
+		_audioSourse.Play();
 	}
 
 	private void ChangeItemPosition()

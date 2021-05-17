@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
 
 	private float _currentTime;
 	private bool _isTimeOut = false;
-	private bool _isPaused;
+	private bool _isPaused = false;
 
 	public bool IsTimeOut
 	{
@@ -33,13 +33,13 @@ public class Timer : MonoBehaviour
 
 	public void Resume()
 	{
-		throw new System.NotImplementedException();
+		_isPaused = true;
 	}
 
-	public void Stop()
-	{
-		throw new System.NotImplementedException();
-	}
+	//public void Stop()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 	private void Update()
 	{
