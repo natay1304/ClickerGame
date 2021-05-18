@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
 
 	private float _currentTime;
 	private bool _isTimeOut = false;
-	private bool _isPaused = false;
+	private bool _isPaused = true;
 
 	public bool IsTimeOut
 	{
@@ -19,27 +19,18 @@ public class Timer : MonoBehaviour
 	}
 
 
-	public void Start(float time)
+	public void StartTimer(float time)
 	{
 		_currentTime = time;
 		_isTimeOut = false;
+		_isPaused = false;
 		UpdateUI(_currentTime);
 	}
 
-	public void Pause()
+	public void Pause(bool value)
 	{
-		_isPaused = false;
+		_isPaused = value;
 	}
-
-	public void Resume()
-	{
-		_isPaused = true;
-	}
-
-	//public void Stop()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 	private void Update()
 	{
@@ -61,6 +52,11 @@ public class Timer : MonoBehaviour
 
 	private void UpdateUI(float time)
 	{
-		_timerText.text = time.ToString("0") + " sec";
+		_timerText.text = time.ToString("0") /*+ " sec"*/;
 	}
+
+    public void SetActive(bool active)
+    {
+		gameObject.SetActive(active);
+    }
 }

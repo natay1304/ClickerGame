@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ToggleController : MonoBehaviour
 {
+	public event Action<bool> OnValueChanged;
 	public bool IsOn
 	{
 		get { return _toggle.isOn; }
@@ -13,34 +14,28 @@ public class ToggleController : MonoBehaviour
 	private Toggle _toggle;
 	[SerializeField]
 	private Animator _animator;
-	[SerializeField]
-	private AudioSource _audioSourse;
 
 	private readonly int _isOnHash = Animator.StringToHash("IsOn");
 
 	public void Start()
 	{
-		SetState(_toggle.isOn);
-		_toggle.onValueChanged.AddListener(SetState);
-		_toggle.onValueChanged.AddListener(SetMusic);
+		OnValueChangedHandler(_toggle.isOn);
+		_toggle.onValueChanged.AddListener(OnValueChangedHandler);
 	}
 
-    private void SetMusic(bool value)
-    {
-		if (value)
-			_audioSourse.mute = false;
-		else
-			_audioSourse.mute = true;
-
-    }
-
-    private void SetState(bool value)
+    private void OnValueChangedHandler(bool value)
 	{
 		_animator.SetBool(_isOnHash, value);
+		OnValueChanged?.Invoke(value);
 	}
 
 	private void OnDestroy()
 	{
-		_toggle.onValueChanged.RemoveListener(SetState);
+		_toggle.onValueChanged.RemoveListener(OnValueChangedHandler);
 	}
+
+	public void SetValue(bool value)
+    {
+		_toggle.isOn = value;
+    }
 }
