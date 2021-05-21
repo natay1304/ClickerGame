@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 	[SerializeField]
+	private LevelManager _levelManager;
+	[SerializeField]
 	private int _levelTime;
 	[SerializeField]
 	private Timer _timer;
@@ -46,8 +48,10 @@ public class GameController : MonoBehaviour
 
 	private bool _doubleBonus, _bigSizeBonus, _freezeBonus;
 
-    // TODO: Item bonuses
-
+	[SerializeField]
+	private SpriteRenderer _cookie;
+	[SerializeField]
+	private SpriteRenderer _background;
 
     private void Awake()
 	{
@@ -59,6 +63,9 @@ public class GameController : MonoBehaviour
 		_currentScoreText.text = _scores.ToString() + "/" + _maxScore.ToString();
 
 		_clickable.SetPosition(GetRandomPosition());
+
+		_cookie.sprite = _levelManager.Cookie;
+		_background.sprite = _levelManager.LevelBackground;
 	}
 
 	IEnumerator Start()
@@ -82,14 +89,22 @@ public class GameController : MonoBehaviour
 		if (_scores >= _maxScore)
 		{
 			_gameOver.GetComponentInChildren<Text>().text = "Y O U  W I N";
+			_timer.Pause(true);
 		}
 		else if(_scores < _maxScore)
         {
 			_gameOver.GetComponentInChildren<Text>().text = "Y O U   L O S E";
-        }
+			_timer.Pause(true);
+		}
 
 		_gameOver.gameObject.SetActive(true);
 	}
+
+	private void AddPlyaerResult()
+    {
+		float playerResult = _timer.CurrentTime;
+
+    }
 
     private void OnClickHandler()
     {

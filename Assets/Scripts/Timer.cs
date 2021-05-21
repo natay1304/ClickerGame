@@ -18,6 +18,11 @@ public class Timer : MonoBehaviour
 		get { return _isTimeOut; }
 	}
 
+	public float CurrentTime
+    {
+		get { return _currentTime; }
+    }
+
 
 	public void StartTimer(float time)
 	{

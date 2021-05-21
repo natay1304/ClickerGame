@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3186f51e0d2b448b69b1e163e53e51fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3186f51e0d2b448b69b1e163e53e51fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3186f51e0d2b448b69b1e163e53e51fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3186f51e0d2b448b69b1e163e53e51fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -617,7 +617,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7962119259149904269}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-6035448162440196205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,6 +649,10 @@ MonoBehaviour:
   - {fileID: 7962119257560837521}
   - {fileID: 7962119259081735146}
   - {fileID: 7962119259230074782}
+  _leaderboardButton: {fileID: 7962119259149904271}
+  _levelCardImage: {fileID: 7962119258064182495}
+  _levelInfoViewPrefab: {fileID: 2553205710246103903, guid: 61d5eb755a73e48c285ba8474d0ba919, type: 3}
+  _container: {fileID: 7962119259149904306}
 --- !u!1 &7962119259230074780
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +718,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3186f51e0d2b448b69b1e163e53e51fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

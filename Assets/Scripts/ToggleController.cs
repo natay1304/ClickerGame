@@ -36,6 +36,7 @@ public class ToggleController : MonoBehaviour
 
 	public void SetValue(bool value)
     {
-		_toggle.isOn = value;
-    }
+		//_toggle.isOn = value;
+		_toggle.SetIsOnWithoutNotify(value);
+	}
 }

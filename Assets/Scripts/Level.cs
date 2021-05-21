@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Level
 {
     public string name;
     public int stars;
-    public Leaderboard[] leaderboard;
+    public List<Leaderboard> leaderboard;
 }
 

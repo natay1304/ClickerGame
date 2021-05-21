@@ -17,6 +17,13 @@ public class LevelInfoLoader : MonoBehaviour
 
         LevelsInfo levelInfo = JsonUtility.FromJson<LevelsInfo>(jsonString);
 
-        _levelMenuView.Initialized(levelInfo.levels);
+        _levelMenuView.Initialize(levelInfo.levels);
     }
+
+    public void AddNewPlayerResult(LevelsInfo newResults)
+    {
+        string newPlayerResults = JsonUtility.ToJson(newResults);
+        File.WriteAllText(path, newPlayerResults);
+    }
+
 }
