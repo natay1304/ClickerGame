@@ -73,7 +73,8 @@ public class GameController : MonoBehaviour
 		_background.sprite = _levelManager.LevelBackground;
 	}
 
-	IEnumerator Start()
+
+    IEnumerator Start()
 	{
 		_timer.OnTimeOut += OnTimeOutHandler;
 		_clickable.OnClick += OnClickHandler;
@@ -101,13 +102,6 @@ public class GameController : MonoBehaviour
 
 	private void OnClickHandler()
     {
-		if(_scores >= _maxScore)
-        {
-			_levelInfoLoader.AddPlayerResult("MY NAME", _timer.CurrentTime, _levelManager.LevelName);
-			GameResultsView gameResultsView = Instantiate(_gameResultPrefab, _container);
-			gameResultsView.Initialize(_levelManager.CurentLevel);
-			_timer.Pause(true);
-		}
 
 		if (_doubleBonus)
         {
@@ -117,17 +111,26 @@ public class GameController : MonoBehaviour
 		else
 			_scores += 1;
 
+
+		if(_scores >= _maxScore)
+        {
+			_scores = _maxScore;
+			_levelInfoLoader.AddPlayerResult("MY NAME", _timer.CurrentTime, _levelManager.LevelName);
+			GameResultsView gameResultsView = Instantiate(_gameResultPrefab, _container);
+			gameResultsView.Initialize(_levelManager.CurentLevel);
+			_timer.Pause(true);
+		}
+
+		_currentScoreText.text = _scores.ToString() + "/" + _maxScore.ToString();
+
 		CheckBonuses();
 
-		Debug.Log(_doubleBonus + "double bonus on click");
-
 		if (_bigSizeBonus)
-			_clickable.GetComponent<Transform>().localScale.Set(2, 2, 0);
+			_clickable.GetComponent<Transform>().transform.localScale = new Vector3(2, 2, 1);
 		else
-			_clickable.GetComponent<Transform>().localScale.Set(1, 1, 0);
+			_clickable.GetComponent<Transform>().transform.localScale = new Vector3(1, 1, 1);
 
 		_progressBar.GetComponent<Image>().fillAmount += 1f / _maxScore;
-		_currentScoreText.text = _scores.ToString() + "/" + _maxScore.ToString();
 		_clickSound.Play();
 
 		_clickable.SetPosition(GetRandomPosition());

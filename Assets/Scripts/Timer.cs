@@ -8,6 +8,8 @@ public class Timer : MonoBehaviour
 
 	[SerializeField]
 	private Text _timerText;
+	[SerializeField]
+	private string _format = "0"; 
 
 	private float _currentTime;
 	private bool _isTimeOut = false;
@@ -57,7 +59,7 @@ public class Timer : MonoBehaviour
 
 	private void UpdateUI(float time)
 	{
-		_timerText.text = time.ToString("0") /*+ " sec"*/;
+		_timerText.text = time.ToString(_format);
 	}
 
     public void SetActive(bool active)

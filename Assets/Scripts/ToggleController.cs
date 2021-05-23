@@ -17,10 +17,14 @@ public class ToggleController : MonoBehaviour
 
 	private readonly int _isOnHash = Animator.StringToHash("IsOn");
 
-	public void Start()
+	public void Awake()
 	{
-		OnValueChangedHandler(_toggle.isOn);
 		_toggle.onValueChanged.AddListener(OnValueChangedHandler);
+	}
+
+    private void OnEnable()
+    {
+		_animator.SetBool(_isOnHash, IsOn);
 	}
 
     private void OnValueChangedHandler(bool value)

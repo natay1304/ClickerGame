@@ -20,8 +20,6 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
-        _toggleMusic.OnValueChanged += MusicValueChangedHandler;
-        _toggleSound.OnValueChanged += SoundValueChangedHandler;
 
         if (!PlayerPrefs.HasKey("Sound"))
             PlayerPrefs.SetInt("Sound", 0);
@@ -31,6 +29,12 @@ public class AudioController : MonoBehaviour
 
         Sound.mute = PlayerPrefs.GetInt("Sound") == 1 ? true : false;
         Music.mute = PlayerPrefs.GetInt("Music") == 1 ? true : false;
+
+        _toggleMusic.SetValue(!Music.mute);
+        _toggleSound.SetValue(!Sound.mute);
+        
+        _toggleMusic.OnValueChanged += MusicValueChangedHandler;
+        _toggleSound.OnValueChanged += SoundValueChangedHandler;
 
         _soundPanelButton.onClick.AddListener(SoundPanelHandler);
 
@@ -45,7 +49,6 @@ public class AudioController : MonoBehaviour
     {
         Sound.mute = !value;
         PlayerPrefs.SetInt("Sound", value ? 0 : 1);
-
     }
 
     private void MusicValueChangedHandler(bool value)
