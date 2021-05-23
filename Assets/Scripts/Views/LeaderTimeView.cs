@@ -11,7 +11,7 @@ public class LeaderTimeView : MonoBehaviour
     [SerializeField]
     private Text _leaderTime;
 
-    public void Initialize(Leaderboard leaderboard)
+    public void Initialize(LeaderboardItem leaderboard)
     {
         _leaderName.text = leaderboard.name;
         _leaderTime.text = leaderboard.time.ToString();

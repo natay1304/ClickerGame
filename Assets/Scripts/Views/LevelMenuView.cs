@@ -17,24 +17,28 @@ public class LevelMenuView : MonoBehaviour
     [SerializeField]
     private LevelManager _levelManager;
 
+    [SerializeField]
+    private LevelInfoLoader _levelInfoLoder;
 
-
-    public void Initialize(Level[] levels)
+    private void Start()
     {
-        int i = 0;
+        Initialize(_levelInfoLoder.LevelsInfo.levels);
+    }
+
+    public void Initialize(List<Level> levels)
+    {
         foreach (var level in levels)
         {
             var levelCardView = Instantiate(_levelCardPrefab, _container);
             levelCardView.Initialize(level, _levelManager.LevelBackgroundSprite(level.name));
-            levelCardView.OnClick += () => ShowDetailedLeaderInfo(level);
-            i++;
+            levelCardView.OnClick += () => ShowDetailedLeaderInfo(level, _levelManager.LevelBackgroundSprite(level.name));
         }
     }
 
-    private void ShowDetailedLeaderInfo(Level level)
+    private void ShowDetailedLeaderInfo(Level level, Sprite levelBackground)
     {
         DetailedLevelInfoView detailedInfoView = Instantiate(_levelInfoViewPrefab, _detailedLevelContainer);
-        detailedInfoView.Initialize(level);
+        detailedInfoView.Initialize(level, levelBackground);
         detailedInfoView.OnPlay += () => _levelManager.LoadLevel(level);
     }
 }

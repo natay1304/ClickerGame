@@ -6,5 +6,5 @@ using UnityEngine;
 [System.Serializable]
 public class LevelsInfo
 {
-    public Level[] levels;
+    public List<Level> levels;
 }

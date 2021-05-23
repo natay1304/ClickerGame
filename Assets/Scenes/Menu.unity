@@ -722,7 +722,6 @@ GameObject:
   - component: {fileID: 358669179}
   - component: {fileID: 358669178}
   - component: {fileID: 358669177}
-  - component: {fileID: 358669181}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -813,19 +812,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &358669181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358669176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da09b3387c086462fba2972c16c480d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelMenuView: {fileID: 1825349200}
 --- !u!1 &409829030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1857,7 @@ MonoBehaviour:
   _container: {fileID: 164881886}
   _detailedLevelContainer: {fileID: 358669180}
   _levelManager: {fileID: 11400000, guid: f6cbe49459211425da597b0f4230f1df, type: 2}
+  _levelInfoLoder: {fileID: 11400000, guid: 7d4fc160ae1b54195ac7af3dbf3a393f, type: 2}
 --- !u!114 &2062825559 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2614427812654389161, guid: 9a2ae7e2e0a8ad043bf8b9001dadfd27, type: 3}

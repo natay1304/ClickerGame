@@ -11,6 +11,8 @@ public class LevelManager : ScriptableObject
     public Sprite LevelBackground { get; private set; }
     public Sprite Cookie { get; private set; }
 
+    public Level CurentLevel { get; private set; }
+
     [SerializeField]
     private List<LevelConfig> _levelConfigs;
 
@@ -22,6 +24,8 @@ public class LevelManager : ScriptableObject
         LevelName = config.levelName;
         LevelBackground = config.levelBackground;
         Cookie = config.cookie;
+
+        CurentLevel = level;
 
         SceneManager.LoadScene("level");
     }

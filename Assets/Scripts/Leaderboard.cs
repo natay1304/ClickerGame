@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Leaderboard
+public class LeaderboardItem
 {
     public int id;
     public string name;

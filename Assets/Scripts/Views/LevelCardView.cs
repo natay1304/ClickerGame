@@ -17,8 +17,8 @@ public class LevelCardView : MonoBehaviour
     [SerializeField]
     private Image _levelCardImage;
 
-    [SerializeField]
-    private DetailedLevelInfoView _levelInfoViewPrefab;
+    //[SerializeField]
+    //private DetailedLevelInfoView _levelInfoViewPrefab;
     [SerializeField]
     private Transform _container;
 

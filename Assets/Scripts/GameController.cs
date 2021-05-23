@@ -6,6 +6,10 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private LevelManager _levelManager;
 	[SerializeField]
+	private GameResultsView _gameResultPrefab;
+	[SerializeField]
+	private Transform _container;
+	[SerializeField]
 	private int _levelTime;
 	[SerializeField]
 	private Timer _timer;
@@ -20,8 +24,6 @@ public class GameController : MonoBehaviour
 	private GameObject _progressBar;
 	[SerializeField]
 	private AudioSource _clickSound;
-	[SerializeField]
-	private GameObject _gameOver;
 
 	[Header("Clickables")]
 	[SerializeField]
@@ -52,6 +54,9 @@ public class GameController : MonoBehaviour
 	private SpriteRenderer _cookie;
 	[SerializeField]
 	private SpriteRenderer _background;
+
+	[SerializeField]
+	private LevelInfoLoader _levelInfoLoader;
 
     private void Awake()
 	{
@@ -86,37 +91,29 @@ public class GameController : MonoBehaviour
 
     private void OnTimeOutHandler()
 	{
-		if (_scores >= _maxScore)
-		{
-			_gameOver.GetComponentInChildren<Text>().text = "Y O U  W I N";
-			_timer.Pause(true);
-		}
-		else if(_scores < _maxScore)
-        {
-			_gameOver.GetComponentInChildren<Text>().text = "Y O U   L O S E";
-			_timer.Pause(true);
-		}
+		_levelInfoLoader.AddPlayerResult("MY NAME", _timer.CurrentTime, _levelManager.LevelName);
 
-		_gameOver.gameObject.SetActive(true);
+		GameResultsView gameResultsView = Instantiate(_gameResultPrefab, _container);
+		gameResultsView.Initialize(_levelManager.CurentLevel);
+
+		_timer.Pause(true);
 	}
 
-	private void AddPlyaerResult()
-    {
-		float playerResult = _timer.CurrentTime;
-
-    }
-
-    private void OnClickHandler()
+	private void OnClickHandler()
     {
 		if(_scores >= _maxScore)
         {
-			_gameOver.GetComponentInChildren<Text>().text = "Y O U  W I N";
+			_levelInfoLoader.AddPlayerResult("MY NAME", _timer.CurrentTime, _levelManager.LevelName);
+			GameResultsView gameResultsView = Instantiate(_gameResultPrefab, _container);
+			gameResultsView.Initialize(_levelManager.CurentLevel);
 			_timer.Pause(true);
-			_gameOver.gameObject.SetActive(true);
 		}
 
 		if (_doubleBonus)
+        {
 			_scores += 2;
+			_progressBar.GetComponent<Image>().fillAmount += 1f / _maxScore;
+		}
 		else
 			_scores += 1;
 
@@ -140,17 +137,17 @@ public class GameController : MonoBehaviour
         {
 			System.Random random = new System.Random();
 			int bonus = random.Next(0, 3);
-			if (bonus < 0)
+			if (bonus == 0)
 			{
 				_bigBonusItem.SetActive(true);
 				_bigBonusItem.SetPosition(GetRandomPosition());
 			}
-			else if (bonus < 2)
+			else if (bonus == 1)
 			{
 				_freezeBonusItem.SetActive(true);
 				_freezeBonusItem.SetPosition(GetRandomPosition());
 			}
-			else if (bonus < 3)
+			else if (bonus == 2)
 			{
 				_doubleBonusItem.SetActive(true);
 				_doubleBonusItem.SetPosition(GetRandomPosition());

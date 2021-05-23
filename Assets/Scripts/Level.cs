@@ -6,6 +6,6 @@ public class Level
 {
     public string name;
     public int stars;
-    public List<Leaderboard> leaderboard;
+    public List<LeaderboardItem> leaderboard;
 }
 

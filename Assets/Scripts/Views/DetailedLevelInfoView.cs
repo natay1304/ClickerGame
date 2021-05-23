@@ -17,6 +17,8 @@ public class DetailedLevelInfoView : MonoBehaviour
     private LeaderTimeView _leaderTimeViewPref;
     [SerializeField]
     private Transform _container;
+    [SerializeField]
+    private Image _levelCardImage;
 
     [SerializeField]
     private Button _closeButton;
@@ -39,9 +41,11 @@ public class DetailedLevelInfoView : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Initialize(Level level)
+    public void Initialize(Level level, Sprite levelBackground)
     {
         _levelName.text = level.name;
+        _levelCardImage.sprite = levelBackground;
+        Debug.Log(levelBackground.name);
         for (int i = 0; i < level.stars; i++)
         {
             _starsImage[i].color = Color.yellow;

@@ -308,10 +308,10 @@ RectTransform:
   m_Father: {fileID: 7504216549094482162}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -274.5}
-  m_SizeDelta: {x: 0, y: 549}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5933229250515046898
 CanvasRenderer:
@@ -387,7 +387,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6902667545518053415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,6 +901,7 @@ MonoBehaviour:
   _levelName: {fileID: 1527815511420323656}
   _leaderTimeViewPref: {fileID: 268516872277800609, guid: b61443a0119ae4b779706874dfc83ad0, type: 3}
   _container: {fileID: 4743998990207895343}
+  _levelCardImage: {fileID: 6215870906321690497}
   _closeButton: {fileID: 3472156600719476401}
   _playButton: {fileID: 2309379514783060951}
 --- !u!1 &4457078767643307074
@@ -1392,7 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6650944, b: 0.6650944, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

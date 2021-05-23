@@ -1,29 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 
-public class LevelInfoLoader : MonoBehaviour
+[CreateAssetMenu]
+public class LevelInfoLoader : ScriptableObject
 {
-    [SerializeField]
-    private LevelMenuView _levelMenuView;
-    private string path;
-    private string jsonString;
+    private string path => Application.streamingAssetsPath + "/Info.json";
+    [NonSerialized]
+    private LevelsInfo _levelInfo = null;
 
-    private void Start()
+    public LevelsInfo LevelsInfo
     {
-        path = Application.streamingAssetsPath + "/Info.json";
-        jsonString = File.ReadAllText(path);
+        get
+        {
+            if (_levelInfo == null)
+                _levelInfo = JsonUtility.FromJson<LevelsInfo>(File.ReadAllText(path));
 
-        LevelsInfo levelInfo = JsonUtility.FromJson<LevelsInfo>(jsonString);
-
-        _levelMenuView.Initialize(levelInfo.levels);
+            return _levelInfo;
+        }
     }
 
-    public void AddNewPlayerResult(LevelsInfo newResults)
+    public void AddPlayerResult(string userName, float time, string levelName)
     {
-        string newPlayerResults = JsonUtility.ToJson(newResults);
+
+        var level = _levelInfo.levels
+            .Find(a => a.name == levelName);
+
+        var leaderboard = level.leaderboard;
+        for (int i = 0; i < leaderboard.Count; )
+        {
+            if(userName == leaderboard[i].name)
+            {
+                leaderboard.RemoveAt(i);
+                continue;
+            }
+            i++;
+        }
+
+        int index = 0;
+        for (int i = 0; i < leaderboard.Count; i++, index++)
+        {
+            if (leaderboard[i].time > time)
+                break;
+        }
+
+        var userResult = new LeaderboardItem() { name = userName, time = time };
+        leaderboard.Insert(index, userResult);
+
+        string newPlayerResults = JsonUtility.ToJson(_levelInfo);
         File.WriteAllText(path, newPlayerResults);
     }
-
 }
